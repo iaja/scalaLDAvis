@@ -8,7 +8,7 @@ unmanagedResources in Runtime += baseDirectory.value / "resources"
 
 
 lazy val clusterRoot = Project(id = "scalaLDAVis", base = file("."))
-                  .settings(BuildSettings.clusterSettings)
+  .settings(BuildSettings.clusterSettings)
 
 lazy val localRoot = Project(id = "scalaLDAVis-local", base = file("."))
   .settings(BuildSettings.intelliJSettings)
@@ -28,7 +28,7 @@ publishMavenStyle := true
 homepage := Some(url(s"https://github.com/$username/$repo"))
 licenses += "Apache-2.0" -> url(s"https://github.com/$username/$repo/blob/master/LICENSE")
 scmInfo := Some(ScmInfo(url(s"https://github.com/$username/$repo"),
-                  s"scm:git@github.com:$username/$repo.git"))
+  s"scm:git@github.com:$username/$repo.git"))
 //apiURL := Some(url(s"https://$username.github.io/$repo/latest/api/"))
 //releaseCrossBuild := true
 
@@ -77,3 +77,23 @@ developers := List(
 pgpReadOnly := false
 
 credentials += Credentials(Path.userHome / ".ivy2" / ".credentials")
+
+//Spark Package Settings
+credentials += Credentials("Spark Packages Realm",
+  "spark-packages.org",
+  sys.env.get("GITHUB_USERNAME").getOrElse("set your GITHUB Credentials"),
+  sys.env.get("GITHUB_PERSONAL_ACCESS_TOKEN").getOrElse("set your GITHUB Credentials"))
+
+spName := "com.github.iaja/scalaLDAvis"
+spShortDescription := "A vanilla Scala port of https://github.com/bmabey/pyLDAvis using Apache Spark as backend"
+
+spDescription :=
+  """Prepares the Spark trained LDA Model to be visualised
+    |in a compact 2-D graph, preserving the topics similarity.""".stripMargin
+
+spIgnoreProvided := true
+sparkVersion := Dependencies.sparkVersion
+
+licenses += "Apache-2.0" -> url("http://opensource.org/licenses/Apache-2.0")
+
+spIncludeMaven := true

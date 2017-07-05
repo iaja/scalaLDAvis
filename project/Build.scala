@@ -33,9 +33,6 @@ object BuildSettings {
     organization := "com.github.iaja",
 
     scalaVersion := buildScalaVersion,
-    spName := "iaja/scalaLDAvis",
-    spIgnoreProvided := true,
-    sparkVersion := Dependencies.sparkVersion,
 
     resolvers += Resolver.jcenterRepo,
     resolvers += "Sonatype Releases" at "http://oss.sonatype.org/content/repositories/releases",
