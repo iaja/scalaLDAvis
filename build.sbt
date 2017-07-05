@@ -7,10 +7,10 @@ unmanagedResources in Test += baseDirectory.value / "resources"
 unmanagedResources in Runtime += baseDirectory.value / "resources"
 
 
-lazy val localRoot = Project(id = "scalaLDAVis", base = file("."))
+lazy val clusterRoot = Project(id = "scalaLDAVis", base = file("."))
                   .settings(BuildSettings.clusterSettings)
 
-lazy val clusterRoot = Project(id = "scalaLDAVis-local", base = file("."))
+lazy val localRoot = Project(id = "scalaLDAVis-local", base = file("."))
   .settings(BuildSettings.intelliJSettings)
 
 

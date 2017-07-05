@@ -11,13 +11,11 @@ object Dependencies {
   val log = "org.slf4j" % "slf4j-log4j12" % "1.7.10"
   val config = "com.typesafe" % "config" % "1.2.1"
 
-  val scalaz =  "org.scalaz" %% "scalaz-core" % "7.2.13"
-  val shapeless =  "com.chuusai" %% "shapeless" % "2.3.2"
   val scalatest = "org.scalatest" % "scalatest_2.11" % "3.0.1" % "test"
 
   val spray = "io.spray" %%  "spray-json" % "1.3.3"
 
-  val includeME = Seq(log, config, scalaz, shapeless, scalatest, spray)
+  val includeME = Seq(log, config, scalatest, spray)
   val spark = Seq(
     "org.apache.spark" %% "spark-core" % sparkVersion,
     "org.apache.spark" %% "spark-sql" % sparkVersion,
@@ -35,7 +33,7 @@ object BuildSettings {
     organization := "com.github.iaja",
 
     scalaVersion := buildScalaVersion,
-    spName := "imaginea/scalaLDAvis",
+    spName := "iaja/scalaLDAvis",
     spIgnoreProvided := true,
     sparkVersion := Dependencies.sparkVersion,
 
