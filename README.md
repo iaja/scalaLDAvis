@@ -7,13 +7,13 @@ You can link against this library in your program at the following coordinates:
 ```
 groupId: com.github.iaja
 artifactId: scalaldavis_2.11
-version: 0.1.0
+version: 0.1.2
 ```
 
 ## With SBT
 
 ```scala
-libraryDependencies ++= "com.github.iaja" % "scalaldavis_2.11" % "0.1.0"
+libraryDependencies ++= "com.github.iaja" % "scalaldavis_2.11" % "0.1.2"
 ```
 
 # Examples
