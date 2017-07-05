@@ -19,19 +19,25 @@ lazy val clusterRoot = Project(id = "scalaLDAVis-local", base = file("."))
 val username = "iaja"
 val repo = "scalaLDAvis"
 
+publishTo := Some(if (isSnapshot.value) Opts.resolver.sonatypeSnapshots else Opts.resolver.sonatypeStaging)
+
+sonatypeProfileName := "com.github.iaja"
+
+publishMavenStyle := true
+
 homepage := Some(url(s"https://github.com/$username/$repo"))
 licenses += "Apache-2.0" -> url(s"https://github.com/$username/$repo/blob/master/LICENSE")
 scmInfo := Some(ScmInfo(url(s"https://github.com/$username/$repo"),
-                  s"git@github.com:$username/$repo.git"))
-apiURL := Some(url(s"https://$username.github.io/$repo/latest/api/"))
-releaseCrossBuild := true
+                  s"scm:git@github.com:$username/$repo.git"))
+//apiURL := Some(url(s"https://$username.github.io/$repo/latest/api/"))
+//releaseCrossBuild := true
 
 releasePublishArtifactsAction := PgpKeys.publishSigned.value
 
-publishMavenStyle := true
+
 publishArtifact in Test := false
 
-publishTo := Some(if (isSnapshot.value) Opts.resolver.sonatypeSnapshots else Opts.resolver.sonatypeStaging)
+
 
 credentials ++= (for {
   username <- sys.env.get("SONATYPE_USERNAME")
@@ -41,20 +47,19 @@ credentials ++= (for {
 pomIncludeRepository := { _ => false }
 
 import ReleaseTransformations._
+
 releaseProcess := Seq[ReleaseStep](
   checkSnapshotDependencies,
   inquireVersions,
-  //runClean,
+  runClean,
   runTest,
   setReleaseVersion,
   commitReleaseVersion,
   tagRelease,
-  publishArtifacts,
+  ReleaseStep(action = Command.process("publishSigned", _), enableCrossBuild = true),
   setNextVersion,
   commitNextVersion,
-  releaseStepCommand("publishSigned"),
-//  releaseStepCommand("sonatypeReleaseAll"),
-  releaseStepCommand("sonatypeReleaseAll"),
+  ReleaseStep(action = Command.process("sonatypeReleaseAll", _), enableCrossBuild = true),
   pushChanges
 )
 
