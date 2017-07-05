@@ -68,7 +68,7 @@ developers := List(
 )
 
 
-useGpg := true
+//useGpg := true
 pgpReadOnly := false
 
 credentials += Credentials(Path.userHome / ".ivy2" / ".credentials")
